@@ -251,13 +251,29 @@ void exibir(NoAVL* raiz){
     exibir(raiz->dir);
 }
 
+void livrosDisponiveis(NoAVL* raiz){ //Percorre em ordem e se estiver disponível faz o print
+    if(!raiz) return;
+    livrosDisponiveis(raiz->esq);
+    if(raiz->livro->disponivel == 1){
+        printf(" %s disponivel \n",raiz->livro->isbn);
+    }
+    livrosDisponiveis(raiz->dir);
+}
+
+// Função para contar o total de nós (livros)
+int qtdLivros(NoAVL *raiz) {
+    if (!raiz) return 0;
+    return 1 + qtdLivros(raiz->esq) + qtdLivros(raiz->dir);
+}
+
 int main() {
     NoAVL *raiz = NULL;
     int opc;
+    int qtd, alt;
     char isbn[14];
     while(1){
         printf("\nDigite a opção desejada:\n");
-        printf("1 - Inserir Livro\n2 - Remover\n3 - Buscar Livro por ISBN\n4 - Listar Todos os Livros(Crescente)\n7 - Emprestar\n8 - Devolver\n9 - Sair\nEscolha: ");
+        printf("1 - Inserir Livro\n2 - Remover\n3 - Buscar Livro por ISBN\n4 - Listar Todos os Livros(Crescente)\n7 - Emprestar\n8 - Devolver\n9 - Estatísticas\n10 - Livros Disponíveis\n11 - Sair\nEscolha: ");
         scanf("%d",&opc);
         getchar();
         system("cls");
@@ -310,6 +326,12 @@ int main() {
             isbn[strcspn(isbn, "\n")] = '\0';
             devolverLivro(raiz, isbn);
         }else if(opc == 9){
+            qtd = qtdLivros(raiz);
+            printf("Quantidade de livros: %d\n", qtd);
+        }else if(opc == 10){
+            alt = alturaNo(raiz);
+            printf("Altura da arvore: %d\n", alt);
+        }else if(opc == 11){
             break;
         }
     }
