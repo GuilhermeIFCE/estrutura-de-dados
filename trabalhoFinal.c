@@ -134,7 +134,7 @@ NoAVL* inserirlivro(NoAVL** raiz, Livro *livro){ // Insere um livro na árvore A
 
 void remover(NoAVL** raiz, char* isbn) { // Remove um livro da árvore AVL pelo ISBN. Depois da remoção, a árvore é rebalanceada. 
     // Caso base: verifica se a árvore está vazia
-    if (!raiz || !*raiz) return;
+    if (*raiz == NULL) return;
 
     // Percorre a árvore para encontrar o nó a remover
     if (strcmp(isbn, (*raiz)->livro->isbn) < 0){  // Busca se está na esquerda
