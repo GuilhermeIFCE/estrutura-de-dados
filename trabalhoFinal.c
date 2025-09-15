@@ -272,11 +272,10 @@ int main() {
     int qtd, alt;
     char isbn[14];
     while(1){
-        printf("\nDigite a opção desejada:\n");
-        printf("1 - Inserir Livro\n2 - Remover\n3 - Buscar Livro por ISBN\n4 - Listar Todos os Livros(Crescente)\n7 - Emprestar\n8 - Devolver\n9 - Estatísticas\n10 - Livros Disponíveis\n11 - Sair\nEscolha: ");
+        printf("\n\nDigite a opção desejada:\n");
+        printf("1 - Inserir Livro\n2 - Remover\n3 - Buscar Livro por ISBN\n4 - Listar Todos os Livros(Crescente)\n5 - Emprestar\n6 - Devolver\n7 - Estatísticas\n8 - Livros Disponíveis\n9 - Sair\nEscolha: ");
         scanf("%d",&opc);
         getchar();
-        system("cls");
 
         if(opc==1){
             char titulo[100],autor[50];
@@ -315,23 +314,24 @@ int main() {
             printf("Livros cadastrados:\n");
             exibir(raiz);
             printf("\n");
-        }else if(opc == 7){
+        }else if(opc == 5){
             printf("Digite o ISBN do livro a emprestar: ");
             fgets(isbn, 14, stdin);
             isbn[strcspn(isbn, "\n")] = '\0';
             emprestarLivro(raiz, isbn);
-        }else if(opc == 8){
+        }else if(opc == 6){
             printf("Digite o ISBN do livro a devolver: ");
             fgets(isbn, 14, stdin);
             isbn[strcspn(isbn, "\n")] = '\0';
             devolverLivro(raiz, isbn);
-        }else if(opc == 9){
+        }else if(opc == 7){
             qtd = qtdLivros(raiz);
-            printf("Quantidade de livros: %d\n", qtd);
-        }else if(opc == 10){
-            alt = alturaNo(raiz);
+            printf("Quantidade de livros disponíveis: %d\n", qtd);
+            alt = altura(raiz);
             printf("Altura da arvore: %d\n", alt);
-        }else if(opc == 11){
+        }else if(opc == 8){
+            livrosDisponiveis(raiz);
+        }else if(opc == 9){
             break;
         }
     }
